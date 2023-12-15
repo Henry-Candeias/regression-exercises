@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from sklearn.model_selection import train_test_split
+
 import env
 import os
 
@@ -55,7 +57,7 @@ def wrangle_zillow():
 
     return df
 
-def splitting_data(df, col):
+def splitting_data(df):
     '''
     Prepare the Telco dataset by cleaning and transforming the data.
 
@@ -78,14 +80,11 @@ def splitting_data(df, col):
     train, validate_test = train_test_split(df,
                      train_size=0.6,
                      random_state=123,
-                     stratify=df[col]
                     )
     
     #second split
     validate, test = train_test_split(validate_test,
                                      train_size=0.5,
                                       random_state=123,
-                                      stratify=validate_test[col]
-                        
                                      )
     return train, validate, test
